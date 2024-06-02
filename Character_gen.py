@@ -10,9 +10,11 @@ Simple CK3 Character Generator by Austin Smith AKA CaptainSlapster!
 
 
 ##TEST VARIABLES
-start_year = input("Enter in your start year!: e.g. 867: ")
+start_year = input("Enter in your start year! e.g. 867: ")
 min_age = input("Enter the minimum age for your characters: ")
 max_age = input("Enter the maximum age for your characters: ")
+religion = input("Enter the religion for your characters e.g. catholic: ")
+culture = input("Enter the culture for your characters e.g. roman: ")
 
 number_of_characters = input("Enter the number of characters to generate: ")
 start_year = int(start_year)
