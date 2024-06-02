@@ -60,9 +60,8 @@ class Character():
 
     def determine_deathyear(self,start_year,min_age,max_age):
         age_range = random.randrange(min_age,max_age)
-        chance_of_death = random.random()
         #laziness for now
-        self.deathyear = (start_year + self.age) + random.randrange(10)
+        self.deathyear = (start_year + max_age)
         self.deathmonth = random.randrange(1,12)
 
         if self.deathmonth == 2:

@@ -1,7 +1,9 @@
 from character_class import *
 import sys
 ###MAINFILE
-
+###
+#   Yes I will need to rewrite this and make it better. I created it with 3-4 hrs of work.s
+###
 print("""
 
 Simple CK3 Character Generator by Austin Smith AKA CaptainSlapster!
@@ -100,7 +102,7 @@ with open('outfile.txt','w+',encoding= 'utf-8')as out:
     for i in range(1,number_of_characters):
         random.seed()
         name = None
-        char = create_character(i,start_year,name,min_age,max_age,"catholic","roman")
+        char = create_character(i,start_year,name,min_age,max_age,religion,culture)
         if char.isfemale == True:
             char.name = random.choice(names_female[random.randrange(len(names_female))])                        
             out.write(filetext_female.format(char.culture,char.id,char.name,char.religion,char.culture,'yes',char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
