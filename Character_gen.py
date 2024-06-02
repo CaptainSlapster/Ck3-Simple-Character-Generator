@@ -14,10 +14,11 @@ start_year = input("Enter in your start year!: e.g. 867: ")
 min_age = input("Enter the minimum age for your characters: ")
 max_age = input("Enter the maximum age for your characters: ")
 
+number_of_characters = input("Enter the number of characters to generate: ")
 start_year = int(start_year)
 min_age = int(min_age)
 max_age = int(max_age)
-
+number_of_characters = int(number_of_characters)
 
 names_file = sys.argv[1]
 #names_file = 'names.txt'
@@ -94,7 +95,7 @@ filetext_female = '''
 ##Create empty file for the characters##
 with open('outfile.txt','w+',encoding= 'utf-8')as out:
     out.write('\ufeff')
-    for i in range(70):
+    for i in range(1,number_of_characters):
         random.seed()
         name = None
         char = create_character(i,start_year,name,min_age,max_age,"catholic","roman")
