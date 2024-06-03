@@ -17,12 +17,15 @@ min_age = input("Enter the minimum age for your characters: ")
 max_age = input("Enter the maximum age for your characters: ")
 religion = input("Enter the religion for your characters e.g. catholic: ")
 culture = input("Enter the culture for your characters e.g. roman: ")
+percent_female = input("Enter a percentage rate for female characters e.g. 0 = 0% 100 = 100%: ")
 
 number_of_characters = input("Enter the number of characters to generate: ")
 start_year = int(start_year)
 min_age = int(min_age)
 max_age = int(max_age)
 number_of_characters = int(number_of_characters)
+percent_female = int(percent_female)
+
 
 names_file = sys.argv[1]
 #names_file = 'names.txt'
@@ -55,7 +58,7 @@ def create_character(charid,start_year,name,min_age,max_age,religion,culture):
     char.id = charid
     char.determine_birth(start_year,min_age,max_age)
     char.determine_deathyear(start_year,min_age,max_age)
-    char.determine_gender(25)
+    char.determine_gender(percent_female)
     char.culture = culture
     char.religion = religion
     char.name = name
