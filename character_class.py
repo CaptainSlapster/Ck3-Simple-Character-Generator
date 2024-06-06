@@ -41,11 +41,48 @@ class Character():
             self.isfemale = False
         
         return self.isfemale
-    def determine_birth(self,start_year,min_age,max_age):
+    def determine_birth_death(self,start_year,min_age,max_age):
         ##Generates the birth year and age for the character object##
-        chooser = random.randrange(min_age,max_age)        
-        self.age = chooser
-        self.birthyear = start_year - self.age
+        random.seed()
+        set_age = random.randrange(min_age,max_age)
+        mortality_chance = random.random() * 100
+        age_mod = set_age
+
+        base_death_chance = mortality_chance + age_mod
+        max_death_chance = 100 + max_age
+
+        if base_death_chance > 100 + max_age:
+            base_death_chance = max_death_chance
+
+        self.age = set_age
+        if self.age >= max_age:
+            self.age = max_age
+        elif self.age <= min_age:
+            self.age = min_age
+
+        ##Kept getting around 500-515 for a death range. This should open it up a bit##
+        self.birthyear = (start_year + random.randrange(-25,50)) - self.age
+
+        ###DEATH STUFF###
+        if base_death_chance >= max_death_chance:
+            self.dead = True
+
+        if base_death_chance > 50:
+            self.dead = True
+
+        if self.dead == True:
+            self.deathyear = self.birthyear + self.age
+
+        #Death catch all in case they're not generated dead#
+        #I'll just make it around 50-70 years 
+        if self.dead == False:
+            deathdate = random.randrange(25,45)
+            if self.age <= max_age + deathdate:
+                self.deathyear = self.birthyear + self.age + deathdate
+            elif self.age <= max_age:
+                self.deathyear = self.birthyear + self.age
+
+        ##Random stuff for the months/days##
         self.birthmonth = random.randrange(1,12)
         if self.birthmonth == 2:
             self.birthday = random.randrange(1,28)
@@ -56,14 +93,7 @@ class Character():
                 self.birthday = random.randrange(1,30)
         else:
             self.birthday = random.randrange(1,31)
-
-
-    def determine_deathyear(self,start_year,min_age,max_age):
-        age_range = random.randrange(min_age,max_age)
-        #laziness for now
-        self.deathyear = (start_year + max_age)
         self.deathmonth = random.randrange(1,12)
-
         if self.deathmonth == 2:
             self.deathday = random.randrange(1,28)
         elif self.deathmonth % 2:
@@ -73,12 +103,11 @@ class Character():
                 self.deathday = random.randrange(1,30)
         else:
             self.deathday = random.randrange(1,31)
-            
-
-
-    #    if self.age >=age_range:
-    #        self.deathyear = start_year + self.age
-    #    return self.deathyear
-    #def determine_dynasty(self,dynastyid):
-    #    self.dynasty = dynastyid
-    #    return self.dynasty
+  
+    def determine_name(self,names_male,names_female):
+        random.seed()
+        if self.isfemale == True:
+            self.name = random.choice(names_female[random.randrange(len(names_female))])
+        else:
+            self.name = random.choice(names_male[random.randrange(len(names_male))])
+        return self.name

@@ -27,8 +27,8 @@ number_of_characters = int(number_of_characters)
 percent_female = int(percent_female)
 
 
-names_file = sys.argv[1]
-#names_file = 'names.txt'
+#names_file = sys.argv[1]
+names_file = 'names.txt'
 
 names_male = []
 names_female = []
@@ -52,17 +52,41 @@ names_male = [i.split() for i in names_male]
 names_female = [i.split() for i in names_female]
 
 
-def create_character(charid,start_year,name,min_age,max_age,religion,culture):
+def create_character(charid,start_year,min_age,max_age,religion,culture,names_male,names_female):
     #initialize character
     char = Character()
     char.id = charid
-    char.determine_birth(start_year,min_age,max_age)
-    char.determine_deathyear(start_year,min_age,max_age)
+    char.determine_birth_death(start_year,min_age,max_age)
     char.determine_gender(percent_female)
     char.culture = culture
     char.religion = religion
-    char.name = name
+    char.name = char.determine_name(names_male,names_female)
     return char
+
+
+def generate_text(fileobj,charobj):
+    fileobj.write(f'''
+    {charobj.culture}_{charobj.id} = {{
+                name = "{charobj.name}"
+
+                religion = {charobj.religion}
+                culture = {charobj.culture}
+    ''')
+    if charobj.isfemale == True:
+        fileobj.write(f'female = yes')
+    else:
+        pass
+    ##Leave space here for traits/skills later on##
+
+    fileobj.write(f'''
+                {charobj.birthyear}.{charobj.birthmonth}.{charobj.birthday} = {{
+                    birth = yes
+                }}
+                {charobj.deathyear}.{charobj.deathmonth}.{charobj.deathday} = {{
+                    death = yes
+                }}
+    }}
+    ''')
 
 filetext = '''
 {0}_{1} = {{
@@ -103,12 +127,12 @@ filetext_female = '''
 with open('outfile.txt','w+',encoding= 'utf-8')as out:
     out.write('\ufeff')
     for i in range(1,number_of_characters):
-        random.seed()
-        name = None
-        char = create_character(i,start_year,name,min_age,max_age,religion,culture)
-        if char.isfemale == True:
-            char.name = random.choice(names_female[random.randrange(len(names_female))])                        
-            out.write(filetext_female.format(char.culture,char.id,char.name,char.religion,char.culture,'yes',char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
-        else:
-            char.name = random.choice(names_male[random.randrange(len(names_male))])  
-            out.write(filetext.format(char.culture,char.id,char.name,char.religion,char.culture,char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
+        char = create_character(i,start_year,min_age,max_age,religion,culture,names_male,names_female)
+        generate_text(out,char)
+#        out.write(f'{char.culture}_{char.id} = {{')
+#        if char.isfemale == True:
+#            char.name = random.choice(names_female[random.randrange(len(names_female))])                        
+#            out.write(filetext_female.format(char.culture,char.id,char.name,char.religion,char.culture,'yes',char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
+#        else:
+#            char.name = random.choice(names_male[random.randrange(len(names_male))])  
+#            out.write(filetext.format(char.culture,char.id,char.name,char.religion,char.culture,char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
