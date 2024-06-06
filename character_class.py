@@ -107,7 +107,7 @@ class Character():
     def determine_name(self,names_male,names_female):
         random.seed()
         if self.isfemale == True:
-            self.name = random.choice(names_female[random.randrange(len(names_female))])
+            self.name = random.choice(names_female)
         else:
-            self.name = random.choice(names_male[random.randrange(len(names_male))])
+            self.name = random.choice(names_male)
         return self.name

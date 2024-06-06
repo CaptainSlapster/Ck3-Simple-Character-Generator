@@ -43,14 +43,17 @@ with open(names_file, 'r') as infile:
     for line in infile:
         name_list.append(line.strip(' \n,'))
 
-
-
 names_male = find_between_tags(name_list,"male:{","}")
 names_female = find_between_tags(name_list,"female:{","}")
 
 names_male = [i.split() for i in names_male]
 names_female = [i.split() for i in names_female]
 
+names_male = [num for elem in names_male for num in elem]
+names_female = [num for elem in names_female for num in elem]
+
+print(names_male)
+print(names_female)
 
 def create_character(charid,start_year,min_age,max_age,religion,culture,names_male,names_female):
     #initialize character
@@ -73,7 +76,7 @@ def generate_text(fileobj,charobj):
                 culture = {charobj.culture}
     ''')
     if charobj.isfemale == True:
-        fileobj.write(f'female = yes')
+        fileobj.write(f'\t\t\tfemale = yes\n')
     else:
         pass
     ##Leave space here for traits/skills later on##
@@ -88,51 +91,9 @@ def generate_text(fileobj,charobj):
     }}
     ''')
 
-filetext = '''
-{0}_{1} = {{
-    name = "{2}"
-
-    religion = {3}
-    culture = {4}
-
-    {5}.{6}.{7} ={{
-        birth = yes
-    }}
-    {8}.{9}.{10} = {{
-        death = yes
-    }}
-}}
-
-'''
-filetext_female = '''
-{0}_{1} = {{
-    name = "{2}"
-
-    religion = {3}
-    culture = {4}
-    female = {5}
-    {6}.{7}.{8} ={{
-        birth = yes
-    }}
-    {9}.{10}.{11} = {{
-        death = yes
-    }}
-
-}}
-
-'''
-
-
 ##Create empty file for the characters##
 with open('outfile.txt','w+',encoding= 'utf-8')as out:
     out.write('\ufeff')
     for i in range(1,number_of_characters):
         char = create_character(i,start_year,min_age,max_age,religion,culture,names_male,names_female)
         generate_text(out,char)
-#        out.write(f'{char.culture}_{char.id} = {{')
-#        if char.isfemale == True:
-#            char.name = random.choice(names_female[random.randrange(len(names_female))])                        
-#            out.write(filetext_female.format(char.culture,char.id,char.name,char.religion,char.culture,'yes',char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
-#        else:
-#            char.name = random.choice(names_male[random.randrange(len(names_male))])  
-#            out.write(filetext.format(char.culture,char.id,char.name,char.religion,char.culture,char.birthyear,char.birthmonth,char.birthday,char.deathyear,char.deathmonth,char.deathday))
