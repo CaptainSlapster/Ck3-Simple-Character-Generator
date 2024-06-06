@@ -1,4 +1,5 @@
 from character_class import *
+from trait_handler import *
 import sys
 ###MAINFILE
 ###
@@ -18,11 +19,13 @@ max_age = input("Enter the maximum age for your characters: ")
 religion = input("Enter the religion for your characters e.g. catholic: ")
 culture = input("Enter the culture for your characters e.g. roman: ")
 percent_female = input("Enter a percentage rate for female characters e.g. 0 = 0% 100 = 100%: ")
+trait_number = input("Enter the maximum traits a character can have: ")
 
 number_of_characters = input("Enter the number of characters to generate: ")
 start_year = int(start_year)
 min_age = int(min_age)
 max_age = int(max_age)
+trait_number = int(trait_number)
 number_of_characters = int(number_of_characters)
 percent_female = int(percent_female)
 
@@ -52,15 +55,13 @@ names_female = [i.split() for i in names_female]
 names_male = [num for elem in names_male for num in elem]
 names_female = [num for elem in names_female for num in elem]
 
-print(names_male)
-print(names_female)
-
-def create_character(charid,start_year,min_age,max_age,religion,culture,names_male,names_female):
+def create_character(charid,start_year,min_age,max_age,religion,culture,names_male,names_female,trait_list):
     #initialize character
     char = Character()
     char.id = charid
     char.determine_birth_death(start_year,min_age,max_age)
     char.determine_gender(percent_female)
+    char.determine_traits(trait_list,trait_number)
     char.culture = culture
     char.religion = religion
     char.name = char.determine_name(names_male,names_female)
@@ -80,6 +81,9 @@ def generate_text(fileobj,charobj):
     else:
         pass
     ##Leave space here for traits/skills later on##
+    for i, v in enumerate(char.traits):
+        fileobj.write(f'''
+                trait = {v}''')
 
     fileobj.write(f'''
                 {charobj.birthyear}.{charobj.birthmonth}.{charobj.birthday} = {{
@@ -95,5 +99,5 @@ def generate_text(fileobj,charobj):
 with open('outfile.txt','w+',encoding= 'utf-8')as out:
     out.write('\ufeff')
     for i in range(1,number_of_characters):
-        char = create_character(i,start_year,min_age,max_age,religion,culture,names_male,names_female)
+        char = create_character(i,start_year,min_age,max_age,religion,culture,names_male,names_female,trait_list)
         generate_text(out,char)

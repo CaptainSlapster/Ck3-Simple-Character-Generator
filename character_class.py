@@ -111,3 +111,10 @@ class Character():
         else:
             self.name = random.choice(names_male)
         return self.name
+    
+    def determine_traits(self,trait_list,max_traits):
+        tl = trait_list
+        for i in range(random.randrange(max_traits)):
+            self.traits.append(random.choice(tl))
+        
+

@@ -2,6 +2,7 @@
 
 This will handle the traits for character creation. It will be done similarly to the character names except with trait names.
 
+
 '''
 
 trait_file = 'traits.txt'

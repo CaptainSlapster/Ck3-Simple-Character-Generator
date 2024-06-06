@@ -1,3 +1,3 @@
-test_trait_1 test_trait_1 test_trait_1 test_trait_1 test_trait_1
+test_trait1 test_trait3 test_trait5
 
-test_trait_1 test_trait_2 test_trait_1
+test_trait7
