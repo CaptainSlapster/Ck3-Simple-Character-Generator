@@ -14,5 +14,3 @@ with open(trait_file, 'r') as tf:
         trait_list.append(line.strip(' \n,'))
 trait_list = [i.split() for i in trait_list]
 trait_list = [num for elem in trait_list for num in elem]
-
-print(trait_list)
