@@ -61,7 +61,10 @@ def create_character(charid,start_year,min_age,max_age,religion,culture,names_ma
     char.id = charid
     char.determine_birth_death(start_year,min_age,max_age)
     char.determine_gender(percent_female)
-    char.determine_traits(trait_list,trait_number)
+    if trait_number > 0:
+        char.determine_traits(trait_list,trait_number)
+    else:
+        pass
     char.culture = culture
     char.religion = religion
     char.name = char.determine_name(names_male,names_female)
