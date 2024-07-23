@@ -1,3 +1,5 @@
 outfile.txt
 __pycache__/trait_handler.cpython-312.pyc
 __pycache__/character_class.cpython-312.pyc
+__pycache__/character_dynasty.cpython-312.pyc
+__pycache__/character_filehandler.cpython-312.pyc

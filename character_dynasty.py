@@ -15,7 +15,7 @@ class Dynasty():
     def __init__(self,id):
         self.id = id # Dynasty ID
         self.maxsize = 14 #14 for testing purposes    
-        
-    def createGeneration():
-        
+        self.generationcount = 0
+        self.maxgenerations = 3
+        self.family = [] 
         pass

@@ -2,7 +2,7 @@
 Character class. This will only generate characters right now.
 '''
 import random
-
+from character_dynasty import *
 
 class Character():
     def __init__(self):
@@ -10,6 +10,7 @@ class Character():
         self.name = ""
         self.age = 0
         self.isfemale = False
+        self.inDynasty = False #default for count function
         self.birthyear = 0
         self.birthmonth = 0
         self.birthday = 0
@@ -21,8 +22,9 @@ class Character():
         self.religion = ''
         #this will fill up with traits and will add the traits later from a file 
         self.traits = []
-    #    self.dynasty = 0
+        self.dynasty = 0
         self.dead = False
+
 
     def determine_gender(self,female_chance):
         fchance = random.random()
@@ -131,4 +133,3 @@ class Character():
         char.religion = religion
         char.name = char.determine_name(names_male,names_female)
         return char
-
