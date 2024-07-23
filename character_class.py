@@ -117,4 +117,18 @@ class Character():
         for i in range(random.randrange(max_traits)):
             self.traits.append(random.choice(tl))
         
+    def create_character(self,charid,start_year,min_age,max_age,religion,culture,percent_female,trait_no,names_male,names_female,trait_list):
+        #initialize character
+        char = Character()
+        char.id = charid
+        char.determine_birth_death(start_year,min_age,max_age)
+        char.determine_gender(percent_female)
+        if trait_no > 0:
+            char.determine_traits(trait_list,trait_no)
+        else:
+            pass
+        char.culture = culture
+        char.religion = religion
+        char.name = char.determine_name(names_male,names_female)
+        return char
 

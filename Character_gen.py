@@ -11,6 +11,8 @@ Simple CK3 Character Generator by Austin Smith AKA CaptainSlapster!
 
 """)
 
+##INIT#
+C = Character()
 
 ##TEST VARIABLES
 start_year = input("Enter in your start year! e.g. 867: ")
@@ -55,21 +57,6 @@ names_female = [i.split() for i in names_female]
 names_male = [num for elem in names_male for num in elem]
 names_female = [num for elem in names_female for num in elem]
 
-def create_character(charid,start_year,min_age,max_age,religion,culture,names_male,names_female,trait_list):
-    #initialize character
-    char = Character()
-    char.id = charid
-    char.determine_birth_death(start_year,min_age,max_age)
-    char.determine_gender(percent_female)
-    if trait_number > 0:
-        char.determine_traits(trait_list,trait_number)
-    else:
-        pass
-    char.culture = culture
-    char.religion = religion
-    char.name = char.determine_name(names_male,names_female)
-    return char
-
 
 def generate_text(fileobj,charobj):
     fileobj.write(f'''
@@ -102,5 +89,6 @@ def generate_text(fileobj,charobj):
 with open('outfile.txt','w+',encoding= 'utf-8')as out:
     out.write('\ufeff')
     for i in range(1,number_of_characters):
-        char = create_character(i,start_year,min_age,max_age,religion,culture,names_male,names_female,trait_list)
+        char = C.create_character(i,start_year,min_age,max_age,religion,culture,percent_female,trait_number,names_male,names_female,trait_list)
         generate_text(out,char)
+
