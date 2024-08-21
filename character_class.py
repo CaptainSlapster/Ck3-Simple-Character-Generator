@@ -138,4 +138,4 @@ class Character():
         char.culture = culture
         char.religion = religion
         char.name = char.determine_name(names_male,names_female)
-        return self
+        return char
