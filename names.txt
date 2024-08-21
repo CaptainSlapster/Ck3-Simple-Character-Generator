@@ -8,6 +8,12 @@ male:{
     Paulinus Paulus Petronius Philip Pompeius Pontianus Priscus Probus Publius Quintus Romanus Romulus Rufinus Rutilius Sabinianus
     Saturninus Sempronius Septimius Sergius Severinus Severus Sextus Symmachus Tacitus Theodosius Tiberius
     Titius Titus Trajan Urbanus Valens Valentinian Valerian Valerius Venantius Vespasian Victor Victorinus Vigilius Vitalianus Volusianus
+    Achiuir Aethon Aenbecan Allan Allcallorred Allisander Aniel Ardle Auust Bili Bran Breth Bridei Briog Broichan
+    Brude Caltram Canu Canuall Canan Caradaig Caruorst Castant Castantin Ciniod Crup Dabuut Deocillimon Deoord
+    Domelch Drest Drosten Eddarrnonn Elpin Enuidaig Erpin Galam Ganant Garalt Gede Gest Gigurum Girom Idual
+    Iduallon Iestan Iuan Irb Lutrin Mael Maelchon Manath Mordeleg Morleo Murtolic Naiton Ninian Pedric Pedur
+    Paul Pidarnoin Ru Ruatirch Rubert Rudri Telurg Telurgan Taran Tarla Uipoig Uist Uuochu
+    Uoret Unen Unuist Urguist Usuullt Uthoil Uudrost Uuen Uuid Uuirp Uuredach Uuroid
 }
 
 
@@ -19,4 +25,7 @@ female:{
     Octavia Palatina Paula Paulina Petronella Petronia Placidia Plautia Plautilla Pompeia Poppaea Praeiecta Publia Pulcheria
     Rusticiana Sabina Sallustia Salonina Salvianella Scantilla Serena Sergia Severa Severina Silvia Spadusa Sulpicia Tarsilla Titiana Ulpia Valeria
     Verina Victoria Vigilantia Viviana
+    Addiena Abrella Allust Arnemetia Brethoc Bride Bronuen Caitrion Cristin Durilia Elaine
+    Elen Eua Madru Maelmurie Mairi Margrud Maud Mor Morag Morien Muriel Neulina Sara
+    Siunod Uen Uluen Uuena Uunis Uusbail
 }

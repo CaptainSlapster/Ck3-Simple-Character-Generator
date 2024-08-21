@@ -10,7 +10,7 @@ class Character():
         self.name = ""
         self.age = 0
         self.isfemale = False
-        self.inDynasty = False #default for count function
+
         self.birthyear = 0
         self.birthmonth = 0
         self.birthday = 0
@@ -22,9 +22,12 @@ class Character():
         self.religion = ''
         #this will fill up with traits and will add the traits later from a file 
         self.traits = []
-        self.dynasty = 0
         self.dead = False
-
+        ##Dyn variables##
+        self.inDynasty = False #default for count function
+        self.dynasty = 0
+        self.father = None
+        self.mother = None
 
     def determine_gender(self,female_chance):
         fchance = random.random()
@@ -41,12 +44,14 @@ class Character():
             self.isfemale = True
         else:
             self.isfemale = False
-        
         return self.isfemale
-    def determine_birth_death(self,start_year,min_age,max_age):
+    def determine_birth_death(self,start_year,min_age,max_age,min_date_range,max_date_range):
         ##Generates the birth year and age for the character object##
+        ##Creates a new seed everytime this runs to help with randomness
         random.seed()
+
         set_age = random.randrange(min_age,max_age)
+
         mortality_chance = random.random() * 100
         age_mod = set_age
 
@@ -62,10 +67,17 @@ class Character():
         elif self.age <= min_age:
             self.age = min_age
 
-        ##Kept getting around 500-515 for a death range. This should open it up a bit##
-        self.birthyear = (start_year + random.randrange(-25,50)) - self.age
+        self.birthyear = (start_year + random.randrange(-min_date_range,max_date_range)) #- self.age               
 
+        ##I NEED TO SEE WHY###
+        print("mortality_chance: " + str(mortality_chance))
+        print("age_mod: " + str(age_mod))
+        print("base_death_chance: " + str(base_death_chance))
+        print("max_death_chance: " + str(max_death_chance))
         ###DEATH STUFF###
+        if self.age >= max_age:
+            self.dead = True
+
         if base_death_chance >= max_death_chance:
             self.dead = True
 
@@ -75,6 +87,7 @@ class Character():
         if self.dead == True:
             self.deathyear = self.birthyear + self.age
 
+        print("is dead: " + str(self.dead) + '\n')
         #Death catch all in case they're not generated dead#
         #I'll just make it around 50-70 years 
         if self.dead == False:
@@ -119,17 +132,16 @@ class Character():
         for i in range(random.randrange(max_traits)):
             self.traits.append(random.choice(tl))
         
-    def create_character(self,charid,start_year,min_age,max_age,religion,culture,percent_female,trait_no,names_male,names_female,trait_list):
+    def create_character(self,charid,start_year,min_age,max_age,religion,culture,percent_female,trait_no,names_male,names_female,trait_list,min_date_range,max_date_range):
         #initialize character
-        char = Character()
-        char.id = charid
-        char.determine_birth_death(start_year,min_age,max_age)
-        char.determine_gender(percent_female)
-        if trait_no > 0:
-            char.determine_traits(trait_list,trait_no)
-        else:
-            pass
-        char.culture = culture
-        char.religion = religion
-        char.name = char.determine_name(names_male,names_female)
-        return char
+        self.id = charid
+        self.determine_birth_death(start_year,min_age,max_age,min_date_range,max_date_range)
+        self.determine_gender(percent_female)
+#        if trait_no > 0:
+#            self.determine_traits(trait_list,trait_no)
+#        else:
+#            pass
+        self.culture = culture
+        self.religion = religion
+        self.name = self.determine_name(names_male,names_female)
+        return self
