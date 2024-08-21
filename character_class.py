@@ -67,13 +67,7 @@ class Character():
         elif self.age <= min_age:
             self.age = min_age
 
-        self.birthyear = (start_year + random.randrange(-min_date_range,max_date_range)) #- self.age               
-
-        ##I NEED TO SEE WHY###
-        print("mortality_chance: " + str(mortality_chance))
-        print("age_mod: " + str(age_mod))
-        print("base_death_chance: " + str(base_death_chance))
-        print("max_death_chance: " + str(max_death_chance))
+        self.birthyear = (start_year + random.randrange(-min_date_range,max_date_range))              
         ###DEATH STUFF###
         if self.age >= max_age:
             self.dead = True
@@ -87,7 +81,6 @@ class Character():
         if self.dead == True:
             self.deathyear = self.birthyear + self.age
 
-        print("is dead: " + str(self.dead) + '\n')
         #Death catch all in case they're not generated dead#
         #I'll just make it around 50-70 years 
         if self.dead == False:
@@ -129,19 +122,20 @@ class Character():
     
     def determine_traits(self,trait_list,max_traits):
         tl = trait_list
-        for i in range(random.randrange(max_traits)):
+        for i in range(random.randrange(0,max_traits)):
             self.traits.append(random.choice(tl))
         
     def create_character(self,charid,start_year,min_age,max_age,religion,culture,percent_female,trait_no,names_male,names_female,trait_list,min_date_range,max_date_range):
         #initialize character
-        self.id = charid
-        self.determine_birth_death(start_year,min_age,max_age,min_date_range,max_date_range)
-        self.determine_gender(percent_female)
-#        if trait_no > 0:
-#            self.determine_traits(trait_list,trait_no)
-#        else:
-#            pass
-        self.culture = culture
-        self.religion = religion
-        self.name = self.determine_name(names_male,names_female)
+        char = Character()
+        char.id = charid
+        char.determine_birth_death(start_year,min_age,max_age,min_date_range,max_date_range)
+        char.determine_gender(percent_female)
+        if trait_no > 0:
+            char.determine_traits(trait_list,trait_no)
+        else:
+            pass
+        char.culture = culture
+        char.religion = religion
+        char.name = char.determine_name(names_male,names_female)
         return self
