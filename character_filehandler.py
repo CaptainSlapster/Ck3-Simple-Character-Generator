@@ -2,10 +2,10 @@ import sys,configparser
 ##File handling#
 
 ##THIS IS FOR TESTING PURPOSES##
-names_file = 'names.txt'
+#names_file = 'names.txt'
 
 #Drag and drop your file onto the exe#
-#names_file = sys.argv[1]
+names_file = sys.argv[1]
 
 names_male = []
 names_female = []
