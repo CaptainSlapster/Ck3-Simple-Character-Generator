@@ -122,9 +122,12 @@ class Character():
     
     def determine_traits(self,trait_list,max_traits):
         tl = trait_list
+        
         for i in range(random.randrange(0,max_traits)):
             self.traits.append(random.choice(tl))
-        
+        self.traits = list(set(self.traits))
+
+
     def create_character(self,charid,start_year,min_age,max_age,religion,culture,percent_female,trait_no,names_male,names_female,trait_list,min_date_range,max_date_range):
         #initialize character
         char = Character()
